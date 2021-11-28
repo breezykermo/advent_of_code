@@ -1,0 +1,11 @@
+[package]
+name = "aoc"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "aoc"
+path = "src/lib.rs"
+
+[dependencies]
+curl = "0.4.41"

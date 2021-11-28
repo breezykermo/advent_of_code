@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+rm -f .env
+rm -f src/today.rs
+cp src/$1/$2.rs src/today.rs
+rm -f .env
+echo "export YEAR=$1" >> .env
+echo "export DAY=$2" >> .env
