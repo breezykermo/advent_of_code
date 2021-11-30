@@ -12,7 +12,6 @@ save:
 	source .env
 	rm -r src/${YEAR}/${DAY}.rs
 	cp src/today.rs src/${YEAR}/${DAY}.rs
-	rm src/today.rs
 
 run:
 	source .env && cargo run | bat

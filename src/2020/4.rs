@@ -1,3 +1,5 @@
+use regex::Regex;
+
 struct Passport {
     byr: Option<i32>,
     iyr: Option<i32>,
@@ -65,18 +67,47 @@ impl Passport {
                                 None
                             }
                         }
-                        "in" => None,
+                        "in" => {
+                            let h = pfx.parse::<i32>().unwrap();
+                            if h >= 59 && h <= 76 {
+                                Some(h)
+                            } else {
+                                None
+                            }
+                        }
                         _ => None,
                     };
                 }
                 "hcl" => {
-                    slf.hcl = Some(vl.to_string());
+                    let hcl = vl.to_string();
+                    slf.hcl = match hcl.chars().next() {
+                        Some('#') => {
+                            let re = Regex::new(r"[a-f0-9]{6}").unwrap();
+                            let tail = &hcl[1..];
+                            if re.is_match(tail) {
+                                Some(hcl)
+                            } else {
+                                None
+                            }
+                        }
+                        _ => None,
+                    };
                 }
                 "ecl" => {
-                    slf.ecl = Some(vl.to_string());
+                    slf.ecl = if vec!["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].contains(&vl)
+                    {
+                        Some(vl.to_string())
+                    } else {
+                        None
+                    }
                 }
                 "pid" => {
-                    slf.pid = Some(vl.to_string());
+                    let re = Regex::new(r"[0-9]{9}").unwrap();
+                    slf.pid = if re.is_match(&vl) {
+                        Some(vl.to_string())
+                    } else {
+                        None
+                    }
                 }
                 "cid" => {
                     slf.cid = Some(vl.parse::<i32>().unwrap());
