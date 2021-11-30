@@ -13,4 +13,4 @@ save:
 	source .env && cp src/today.rs src/${YEAR}/${DAY}.rs
 
 run:
-	source .env && cargo run | bat
+	source .env && cargo run | less

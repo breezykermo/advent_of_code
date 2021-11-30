@@ -1,2 +1,2 @@
 run:
-	dune exec ocaml
+	dune exec ocaml | less
