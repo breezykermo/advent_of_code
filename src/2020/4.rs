@@ -1,5 +1,6 @@
 use regex::Regex;
 
+#[derive(Debug)]
 struct Passport {
     byr: Option<i32>,
     iyr: Option<i32>,
@@ -102,7 +103,7 @@ impl Passport {
                     }
                 }
                 "pid" => {
-                    let re = Regex::new(r"[0-9]{9}").unwrap();
+                    let re = Regex::new(r"^[0-9]{9}$").unwrap();
                     slf.pid = if re.is_match(&vl) {
                         Some(vl.to_string())
                     } else {
@@ -121,13 +122,13 @@ impl Passport {
     }
 
     fn is_valid(self: &Self) -> bool {
-        return self.byr != None
+        self.byr != None
             && self.iyr != None
             && self.eyr != None
             && self.hgt != None
             && self.hcl != None
             && self.ecl != None
-            && self.pid != None;
+            && self.pid != None
     }
 }
 
