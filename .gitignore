@@ -1,3 +1,3 @@
-target/
-.env
-src/today.rs
+rust/target/
+rust/.env
+rust/src/today.rs
