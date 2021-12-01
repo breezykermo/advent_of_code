@@ -29,14 +29,6 @@ let snd_parts = List.map lines ~f:(fun s -> String.sub s ~pos:7 ~len:3)
 let rows = List.map fst_parts ~f:(fun s -> rowsearch (list_of_string s))
 let cols = List.map snd_parts ~f:(fun s -> colsearch (list_of_string s))
 
-(* let lines = list_with_one_item lines *)
-(* let rows = list_with_one_item rows *)
-(* let cols = list_with_one_item cols *)
-
-(* let _ = List.map lines ~f:(fun x -> print_endline x) *)
-(* let _ = List.map rows ~f:(fun x -> print_endline (string_of_int x)) *)
-(* let _ = List.map cols ~f:(fun x -> print_endline (string_of_int x)) *)
-
 let seat_id row col = 8*row + col
 let seat_ids = match (List.zip rows cols) with
 | Ok x -> x
