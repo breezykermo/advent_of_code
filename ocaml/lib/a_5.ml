@@ -35,4 +35,22 @@ let seat_ids = match (List.zip rows cols) with
 | Unequal_lengths -> raise (BadInput "xxxx")
 let seat_ids = List.map seat_ids ~f:(fun (x,y) -> seat_id x y)
 
-let solution = string_of_int (List.fold seat_ids ~init:0 ~f:(fun acc vl -> max acc vl))
+let part1 = string_of_int (List.fold seat_ids ~init:0 ~f:(fun acc vl -> max acc vl))
+
+let find_my_seat acc vl =
+    let (idx, lstlst, lst) = acc in
+    if idx < 0 then acc else
+        if (lstlst+1 = lst && lst+1 = vl)
+        then (-lstlst, lst, vl)
+        else (idx+1, lst, vl)
+
+
+(* NO IDEA why this sort isn't working *)
+let sorted_seat_ids = List.stable_sort seat_ids ~compare:Int.compare
+(* let _ = List.map sorted_seat_ids ~f:(fun x -> print_endline (string_of_int x)) *)
+(* index, lastlast, last *)
+let part2 =
+    let (x, y, z)= List.fold_left ~init:(0, 0, 0) ~f:find_my_seat sorted_seat_ids in
+    (string_of_int x) ^ "-" ^ (string_of_int y) ^ "-" ^ (string_of_int z)
+
+let solution = "Part 1: " ^ part1 ^"\nPart 2: " ^ part2
