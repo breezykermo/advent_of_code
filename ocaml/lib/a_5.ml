@@ -18,7 +18,7 @@ let rec srch (c1: char) (c2: char) (lo: int) (hi: int) (s: char list) =
             | _ -> raise (BadInput "Bad char")
 
 let rowsearch = srch 'F' 'B' 0 128
-let colsearch = srch 'L' 'R' 0 7
+let colsearch = srch 'L' 'R' 0 8
 
 (* parsing logic *)
 let lines = In_channel.read_lines "./data/a/5.txt"
