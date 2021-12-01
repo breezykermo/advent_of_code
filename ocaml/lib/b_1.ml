@@ -1,9 +1,5 @@
 open Core
 
-let rec firstk k xs = match xs with
-| [] -> failwith "firstk"
-| x::xs -> if k=1 then [x] else x::firstk (k-1) xs;;
-
 type counter = {
     idx: int;
     memory: int list;
