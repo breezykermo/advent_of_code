@@ -7,8 +7,6 @@ type counter = {
     inc_slide_3_count: int;
 }
 
-let lines = In_channel.read_lines "./data/b/1.txt"
-
 let f ctr next =
     let cur = int_of_string next in
     let b1 = match ctr.memory with
@@ -24,6 +22,8 @@ let f ctr next =
         inc_slide_3_count = ctr.inc_slide_3_count + (if fst_mem > snd_mem then 1 else 0);
     };;
 
+(* parsing *)
+let lines = In_channel.read_lines "./data/b/1.txt"
 let init_counter: counter = {idx=0; memory=[]; inc_count=0; inc_slide_3_count=0}
 let ctr = List.fold ~init:init_counter ~f:f lines
 
