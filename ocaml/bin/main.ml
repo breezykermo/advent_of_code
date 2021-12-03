@@ -1,2 +1,2 @@
-let solution = Adventofcode.B_1.solution
+let solution = Adventofcode.B_2.solution
 let () = print_endline solution
